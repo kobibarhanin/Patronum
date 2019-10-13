@@ -1,8 +1,8 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import random
 import string
 from net_scan import scan
-
+from net_govern import net_kill
 
 app = Flask(__name__)
 
@@ -20,6 +20,12 @@ def net_view_main():
     print(f'* Deploying hosts: {hosts}')
     return jsonify(hosts)
 
+@app.route('/deauth', methods=['GET', 'POST'])
+def deauth():
+    target = request.form.get('target')
+    print(f'* Deauth target host: {target}')
+    net_kill(target)
+    return "done" # TODO - remove
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
