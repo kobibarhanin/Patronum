@@ -11,7 +11,7 @@ ifconfig ${interface} down
 echo "changing to monitor mode"
 iwconfig ${interface} mode monitor
 
-echo "bringing wlano up"
+echo "bringing ${interface} up"
 ifconfig ${interface} up
 
 echo "done"
